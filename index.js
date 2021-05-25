@@ -7,6 +7,8 @@ app.use(express.json());
 app.use(session({secret: 'ssshhhhh'}));
 //routes
 app.use(require('./routes/index'));
-app.listen(3000);
-console.log('Server on port 3000');
+const port = process.env.PORT || 8000;
+app.listen(port, () => {
+    console.log("App is running on port " + port);
+});
 module.exports = app;

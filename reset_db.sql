@@ -4,7 +4,7 @@ CREATE TABLE usuario
   id_usuario SERIAL ,
   password VARCHAR(100) NOT NULL,
   Email TEXT NOT NULL,
-  phone_number TEXT NOT NULL,/*/*
+  phone_number TEXT NOT NULL,
   user_name TEXT NOT NULL,
   activo BOOLEAN DEFAULT FALSE,
   credit_card VARCHAR(40),
