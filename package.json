@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "pruebas aun",
   "main": "index.js",
+  "engines": {
+    "node": "12.11.1"
+    },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
