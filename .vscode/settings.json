@@ -1,0 +1,31 @@
+{
+    "discord.enabled": true,
+    "sqltools.connections": [
+        {
+            "pgOptions": {
+                "ssl": {
+                    "rejectUnauthorized": false,
+                    "requestCert": false
+                }
+            },
+            "previewLimit": 50,
+            "server": "ec2-3-212-75-25.compute-1.amazonaws.com",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "db-heroku-caneria",
+            "database": "df41m6nhvrp9tk",
+            "username": "utohvjccihuwwg",
+            "password": "6e91b4e511ae86e0c361a93d4f01ea93beffb95f4e4cbcb76938c393eb88e92e"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "askForPassword": true,
+            "driver": "PostgreSQL",
+            "name": "DB local",
+            "database": "firstapi",
+            "username": "postgres"
+        }
+    ]
+}
