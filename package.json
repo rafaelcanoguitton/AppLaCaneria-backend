@@ -4,7 +4,7 @@
   "description": "pruebas aun",
   "main": "index.js",
   "engines": {
-    "node": "12.11.1"
+    "node": ">= 0.8.14"
     },
   "dependencies": {
     "bcrypt": "^5.0.1",
