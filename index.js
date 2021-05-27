@@ -9,6 +9,6 @@ app.use(session({secret: 'ssshhhhh'}));
 app.use(require('./routes/index'));
 const port = process.env.PORT || config.httpPort;
 app.listen(port, () => {
-    console.log("App is running on port " + port);
+    console.log("App is running on port: " + port);
 });
 module.exports = app;

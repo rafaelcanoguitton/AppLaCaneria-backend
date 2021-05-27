@@ -30,12 +30,12 @@ CREATE TABLE pedido
 
 CREATE TABLE items
 (
-  nombre VARCHAR(20) NOT NULL,
+  nombre TEXT NOT NULL,
   precio INT NOT NULL,
-  tamaño VARCHAR(10),
-  adicional VARCHAR(10),
-  opcion VARCHAR(10),
-  ingredientes VARCHAR(20),
+  tamaño TEXT,
+  adicional TEXT,
+  opcion TEXT,
+  ingredientes TEXT,
   id_pedido INT NOT NULL,
   FOREIGN KEY (id_pedido) REFERENCES Pedido(id_pedido)
 );
