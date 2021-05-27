@@ -98,7 +98,7 @@ const logout=(req,res)=>{
         if(err) {
             return console.log(err);
         }
-        res.send('YASTAS DESLOGEADO CAGADA');
+        res.send('Desloggeado');
     });
 }
 const hacer_pedido=async(req,res)=>{
