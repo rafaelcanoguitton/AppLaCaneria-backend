@@ -1,13 +1,10 @@
 const express = require('express');
 const session = require('express-session');
-const redisStore = require('connect-redis')(session);
-const redis   = require("redis");
-const client  = redis.createClient();
-const app = express();
+const app = express()
 //middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(session({secret: process.env.SESSION_SECRET,resave: false,saveUninitialized: true, store: new redisStore({ host: 'localhost', port: 6379, client: client,ttl :  260})}));
+app.use(session({secret: process.env.SESSION_SECRET,resave: false,saveUninitialized: true}));
 //routes
 app.use(require('./routes/index'));
 const port = process.env.PORT || config.httpPort;
