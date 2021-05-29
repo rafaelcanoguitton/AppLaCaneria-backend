@@ -1,6 +1,8 @@
 const express = require('express');
 const session = require('express-session');
 const redisStore = require('connect-redis')(session);
+const redis   = require("redis");
+const client  = redis.createClient();
 const app = express();
 //middlewares
 app.use(express.urlencoded({ extended: true }));
