@@ -41,8 +41,8 @@ const createUser = async(req,res)=>{
         port:465,
         secure:true,
         auth:{
-            user:"lacaneriaapp@gmail.com",
-            pass:"oukvfjjtblvpxqfb",
+            user:process.env.EMAIL,
+            pass:process.env.PASSWORD,
         },
     });
     var fullUrl = req.protocol + '://' + req.get('host') + '/verEmail/';
