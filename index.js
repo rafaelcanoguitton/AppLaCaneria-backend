@@ -4,7 +4,7 @@ const app = express()
 //middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(session({secret: 'ssshhhhh'}));
+app.use(session({secret: process.env.SESSION_SECRET,resave: false,saveUninitialized: true}));
 //routes
 app.use(require('./routes/index'));
 const port = process.env.PORT || config.httpPort;
