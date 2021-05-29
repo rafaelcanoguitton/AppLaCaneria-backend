@@ -1,5 +1,5 @@
 const express = require('express');
-const session = require('cookie-session');
+const session = require('express-session');
 const app = express();
 //middlewares
 app.use(express.urlencoded({ extended: true }));
