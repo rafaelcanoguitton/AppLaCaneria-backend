@@ -7,7 +7,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
+    secret: "sasduuiq1912939alsalcl",
     resave: false,
     saveUninitialized: true,
     store: new MemoryStore({
