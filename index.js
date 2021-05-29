@@ -7,7 +7,7 @@ const app = express();
 //middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(session({secret: process.env.SESSION_SECRET,resave: false,saveUninitialized: true, store: new redisStore()}));
+app.use(session({secret: process.env.SESSION_SECRET,resave: false,saveUninitialized: true, store: new redisStore({  client: client})}));
 //routes
 app.use(require('./routes/index'));
 const port = process.env.PORT || config.httpPort;
