@@ -4,7 +4,8 @@ const { getMaxListeners } = require('node:process');
 const mailer =require('nodemailer');
 const saltRounds=10;
 //URI cause I literally can't connect to the cloud db otherwise
-const connectionString='postgres://utohvjccihuwwg:6e91b4e511ae86e0c361a93d4f01ea93beffb95f4e4cbcb76938c393eb88e92e@ec2-3-212-75-25.compute-1.amazonaws.com:5432/df41m6nhvrp9tk';
+//const connectionString='postgres://utohvjccihuwwg:6e91b4e511ae86e0c361a93d4f01ea93beffb95f4e4cbcb76938c393eb88e92e@ec2-3-212-75-25.compute-1.amazonaws.com:5432/df41m6nhvrp9tk';
+const connectionString=process.env.DATABASE_URL;
 // const pool =new Pool({
 //     host:'localhost',
 //     user:'postgres',
