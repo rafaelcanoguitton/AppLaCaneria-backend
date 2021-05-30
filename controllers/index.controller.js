@@ -155,5 +155,6 @@ module.exports={
     admin,
     logout,
     hacer_pedido,
-    verEmail
+    verEmail,
+    easter
 }
