@@ -1,6 +1,7 @@
 const { Router }= require('express');
 const router = Router();
-const {getUsers,createUser,getUser,login,admin,logout,hacer_pedido,verEmail}=require('../controllers/index.controller')
+const {getUsers,createUser,getUser,login,admin,logout,hacer_pedido,verEmail,easter}=require('../controllers/index.controller');
+router.get('/',easter);
 router.post('/login',login);
 router.get('/users',getUsers);
 router.get('/user/:id',getUser);
