@@ -19,6 +19,9 @@ const pool= new Pool({
     }
 })
 var sess;
+const easter=async(req,res)=>{
+    res.status(200).send(';)');
+}
 const getUsers=async (req,res)=>{
     const response = await pool.query('SELECT * FROM usuario');
     //console.log(response.rows);
