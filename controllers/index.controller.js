@@ -107,8 +107,8 @@ const logout=(req,res)=>{
 const hacer_pedido=async(req,res)=>{
     sess=req.session;
     if(sess.id_usuario){
-        const{medio_de_pago,ubicacion,comentario,items}=req.body;
-        const response=await pool.query('INSERT INTO pedido(estado,medio_de_pago,ubicación,comentario,id_usuario)VALUES($1,$2,$3,$4,$5) RETURNING id_pedido',["activo",medio_de_pago,ubicacion,comentario,sess.id_usuario]);
+        const{medio_de_pago,latitud,longitud,comentario,items}=req.body;
+        const response=await pool.query('INSERT INTO pedido(estado,medio_de_pago,latitud,longitud,comentario,id_usuario)VALUES($1,$2,$3,$4,$5,$6) RETURNING id_pedido',["activo",medio_de_pago,latitud,longitud,comentario,sess.id_usuario]);
         var i;
         for (i = 0; i < items.length; i++) {
             var consulta="INSERT INTO items(";
