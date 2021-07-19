@@ -146,7 +146,22 @@ const verEmail=async(req,res)=>{
     const response=await pool.query("UPDATE usuario SET ACTIVO=TRUE , token=NULL WHERE token=$1;",[req.params.hashedId.toString()]);
     res.send("¡Email verificado! Por favor inicie sesión.");
 }
-
+const recCon=async(req,res)=>{
+    const cryptoRandomString = require('crypto-random-string');
+    const token=cryptoRandomString(20);
+    const response=await pool.query('UPDATE usuario SET token=$1 WHERE email=$2',[token,req.params.email]);
+    res.send(token);
+}
+const recCon2=async(req,res)=>{
+    try {
+        const password=req.body.password;
+        const HashedPassword=await bcrypt.hash(password,saltRounds);
+        const response=await pool.query('UPDATE usuario SET password=$2, token=NULL WHERE token=$2',[req.params.token,HashedPassword]);
+        res.send('¡Contraseña actualizada correctamente!');
+    } catch (error) {
+        res.status(401).send('El token ha expirado');
+    }
+}
 module.exports={
     getUsers,
     createUser,
@@ -156,5 +171,7 @@ module.exports={
     logout,
     hacer_pedido,
     verEmail,
-    easter
+    easter,
+    recCon,
+    recCon2
 }
