@@ -149,8 +149,32 @@ const verEmail=async(req,res)=>{
 const recCon=async(req,res)=>{
     const cryptoRandomString = require('crypto-random-string');
     const token=cryptoRandomString(20);
-    const response=await pool.query('UPDATE usuario SET token=$1 WHERE email=$2',[token,req.params.email]);
-    res.send(token);
+    try {
+        const response=await pool.query('UPDATE usuario SET token=$1 WHERE email=$2',[token,req.params.email]);   
+        var transporter=mailer.createTransport({
+            host:"smtp.gmail.com",
+            port:465,
+            secure:true,
+            auth:{
+                user:process.env.EMAIL,
+                pass:process.env.PASSWORD,
+            },
+        });
+        var fullUrl = req.protocol + '://' + req.get('host') + '/newpasswd/';
+        await transporter.sendMail({
+            from:'"App La Cañeria" <lacaneriaapp@gmail.com>',
+            to: email,
+            subject:"¡Complete su registro!",
+            html: `
+            <b> Por favor haga click en el siguiente enlace para cambiar su contraseña.<b>
+            <a href=${fullUrl}${token}>${fullUrl}${token}</a>
+            `
+        });
+        res.send('¡Revise su correo para cambiar su contraseña!');
+    } catch (error) {
+        console.log(error);
+        res.status(401).send('Usuario no encontrado.')
+    }
 }
 const recCon2=async(req,res)=>{
     try {
@@ -159,6 +183,7 @@ const recCon2=async(req,res)=>{
         const response=await pool.query('UPDATE usuario SET password=$2, token=NULL WHERE token=$2',[req.params.token,HashedPassword]);
         res.send('¡Contraseña actualizada correctamente!');
     } catch (error) {
+        console.log(error);
         res.status(401).send('El token ha expirado');
     }
 }
