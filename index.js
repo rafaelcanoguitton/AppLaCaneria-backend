@@ -17,8 +17,8 @@ app.use(
   })
 );
 //routes
-console.log(proces.env.KEY);
-console.log(proces.env.CERT);
+console.log(process.env.KEY);
+console.log(process.env.CERT);
 app.use(require("./routes/index"));
 const port = process.env.PORT || config.httpsPort;
 https.createServer({
