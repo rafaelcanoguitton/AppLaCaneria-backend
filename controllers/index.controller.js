@@ -22,15 +22,6 @@ var sess;
 const easter=async(req,res)=>{
     res.status(200).send(';)');
 }
-const getUsers=async (req,res)=>{
-    const response = await pool.query('SELECT * FROM usuario');
-    //console.log(response.rows);
-    res.status(200).json(response.rows);
-}
-const getUser=async(req,res)=>{
-    const response=await pool.query('SELECT * FROM usuario WHERE id_usuario=$1',[req.params.id]);
-    res.json(response.rows);
-}
 const createUser = async(req,res)=>{
     const {password,email,num,user_name,credit}=req.body;
     const HashedPassword=await bcrypt.hash(password,saltRounds);
@@ -190,9 +181,7 @@ const recCon2=async(req,res)=>{
     }
 }
 module.exports={
-    getUsers,
     createUser,
-    getUser,
     login,
     admin,
     logout,

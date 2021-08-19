@@ -3,8 +3,6 @@ const router = Router();
 const {getUsers,createUser,getUser,login,admin,logout,hacer_pedido,verEmail,easter,recCon,recCon2}=require('../controllers/index.controller');
 router.get('/',easter);
 router.post('/login',login);
-router.get('/users',getUsers);
-router.get('/user/:id',getUser);
 router.post('/registrar',createUser);
 router.get('/admin',admin);
 router.get('/logout',logout);
