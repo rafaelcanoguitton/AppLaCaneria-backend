@@ -2,6 +2,7 @@ const express = require("express");
 const session = require("express-session");
 const MemoryStore = require("memorystore")(session);
 const app = express();
+const https = require("https");
 //middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -18,7 +19,11 @@ app.use(
 //routes
 app.use(require("./routes/index"));
 const port = process.env.PORT || config.httpPort;
-app.listen(port, () => {
+https.createServer({
+    key: process.env.KEY,
+    cert: process.env.CERT
+},app)
+.listen(port, () => {
   console.log("App is running on port: " + port);
 });
 module.exports = app;
