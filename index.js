@@ -18,13 +18,11 @@ app.use(
   })
 );
 //routes
-console.log(process.env.KEY);
-console.log(process.env.CERT);
 app.use(require("./routes/index"));
 const port = process.env.PORT || config.httpsPort;
 https.createServer({
-    key: fs.readFileSync(process.env.KEY),
-    cert: fs.readFileSync(process.env.CERT),
+    key: fs.readFileSync("server.key"),
+    cert: fs.readFileSync("server.cert"),
     ciphers: "DEFAULT:!SSLv2:!RC4:!EXPORT:!LOW:!MEDIUM:!SHA1",
 },app)
 .listen(port, () => {
