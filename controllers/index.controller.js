@@ -162,6 +162,8 @@ const recCon=async(req,res)=>{
             },
         });
         var fullUrl = req.protocol + '://' + req.get('host') + '/newpasswd/';
+        console.log(email);
+        console.log(req.body);
         await transporter.sendMail({
             from:'"App La Cañeria" <lacaneriaapp@gmail.com>',
             to: email,
