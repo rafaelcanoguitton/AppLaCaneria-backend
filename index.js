@@ -18,10 +18,11 @@ app.use(
 );
 //routes
 app.use(require("./routes/index"));
-const port = process.env.PORT || config.httpPort;
+const port = process.env.PORT || config.httpsPort;
 https.createServer({
     key: process.env.KEY,
-    cert: process.env.CERT
+    cert: process.env.CERT,
+    ciphers: "DEFAULT:!SSLv2:!RC4:!EXPORT:!LOW:!MEDIUM:!SHA1",
 },app)
 .listen(port, () => {
   console.log("App is running on port: " + port);
