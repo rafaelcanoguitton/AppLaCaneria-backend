@@ -150,7 +150,8 @@ const recCon=async(req,res)=>{
     const cryptoRandomString = require('crypto-random-string');
     const token=cryptoRandomString(20);
     try {
-        const response=await pool.query('UPDATE usuario SET token=$1 WHERE email=$2',[token,req.params.email]);   
+        const{email}=req.body;
+        const response=await pool.query('UPDATE usuario SET token=$1 WHERE email=$2',[token,email]);   
         var transporter=mailer.createTransport({
             host:"smtp.gmail.com",
             port:465,
@@ -163,7 +164,7 @@ const recCon=async(req,res)=>{
         var fullUrl = req.protocol + '://' + req.get('host') + '/newpasswd/';
         await transporter.sendMail({
             from:'"App La Cañeria" <lacaneriaapp@gmail.com>',
-            to: req.params.email,
+            to: email,
             subject:"¡Complete su registro!",
             html: `
             <b> Por favor haga click en el siguiente enlace para cambiar su contraseña.<b>
