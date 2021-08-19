@@ -134,7 +134,7 @@ const hacer_pedido=async(req,res)=>{
             const response1=await pool.query(consulta,valores);
             console.log(response1);
         } 
-        res.send("Orden hecha correctamente")
+        res.status(200).send("Orden hecha correctamente")
 
     }
     else{
@@ -143,7 +143,7 @@ const hacer_pedido=async(req,res)=>{
 
 }
 const verEmail=async(req,res)=>{
-    const response=await pool.query("UPDATE usuario SET ACTIVO=TRUE , token=NULL WHERE token=$1;",[req.params.hashedId.toString()]);
+    await pool.query("UPDATE usuario SET ACTIVO=TRUE , token=NULL WHERE token=$1;",[req.params.hashedId.toString()]);
     res.send("¡Email verificado! Por favor inicie sesión.");
 }
 const recCon=async(req,res)=>{
@@ -151,7 +151,7 @@ const recCon=async(req,res)=>{
     const token=cryptoRandomString(20);
     try {
         const{email}=req.body;
-        const response=await pool.query('UPDATE usuario SET token=$1 WHERE email=$2',[token,email]);   
+        await pool.query('UPDATE usuario SET token=$1 WHERE email=$2',[token,email]);   
         var transporter=mailer.createTransport({
             host:"smtp.gmail.com",
             port:465,
@@ -173,7 +173,9 @@ const recCon=async(req,res)=>{
             <a href=${fullUrl}${token}>${fullUrl}${token}</a>
             `
         });
-        res.send('¡Revise su correo para cambiar su contraseña!');
+        console.log('Yes the res gets executed');
+        
+        res.status(200).send('¡Revise su correo para cambiar su contraseña!');
     } catch (error) {
         console.log(error);
         res.status(401).send('Usuario no encontrado.')
