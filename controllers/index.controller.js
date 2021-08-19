@@ -164,10 +164,10 @@ const recCon=async(req,res)=>{
         var fullUrl = req.protocol + '://' + req.get('host') + '/newpasswd/';
         console.log(email);
         console.log(req.body);
-        await transporter.sendMail({
+        transporter.sendMail({
             from:'"App La Cañeria" <lacaneriaapp@gmail.com>',
             to: email,
-            subject:"¡Complete su registro!",
+            subject:"Cambio de contraseña.",
             html: `
             <b> Por favor haga click en el siguiente enlace para cambiar su contraseña.<b>
             <a href=${fullUrl}${token}>${fullUrl}${token}</a>
