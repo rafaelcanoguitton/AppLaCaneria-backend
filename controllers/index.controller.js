@@ -162,8 +162,6 @@ const recCon=async(req,res)=>{
             },
         });
         var fullUrl = req.protocol + '://' + req.get('host') + '/newpasswd/';
-        console.log(email);
-        console.log(req.body);
         transporter.sendMail({
             from:'"App La Cañeria" <lacaneriaapp@gmail.com>',
             to: email,
@@ -173,7 +171,6 @@ const recCon=async(req,res)=>{
             <a href=${fullUrl}${token}>${fullUrl}${token}</a>
             `
         });
-        console.log('Yes the res gets executed');
         
         res.status(200).send('¡Revise su correo para cambiar su contraseña!');
     } catch (error) {
@@ -185,7 +182,7 @@ const recCon2=async(req,res)=>{
     try {
         const password=req.body.password;
         const HashedPassword=await bcrypt.hash(password,saltRounds);
-        const response=await pool.query('UPDATE usuario SET password=$2, token=NULL WHERE token=$2',[req.params.token,HashedPassword]);
+        const response=await pool.query('UPDATE usuario SET password=$2, token=NULL WHERE token=$1',[req.params.token,HashedPassword]);
         res.send('¡Contraseña actualizada correctamente!');
     } catch (error) {
         console.log(error);
