@@ -163,7 +163,7 @@ const recCon=async(req,res)=>{
         var fullUrl = req.protocol + '://' + req.get('host') + '/newpasswd/';
         await transporter.sendMail({
             from:'"App La Cañeria" <lacaneriaapp@gmail.com>',
-            to: email,
+            to: req.params.email,
             subject:"¡Complete su registro!",
             html: `
             <b> Por favor haga click en el siguiente enlace para cambiar su contraseña.<b>
