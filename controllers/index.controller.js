@@ -15,13 +15,13 @@ const easter = async (req, res) => {
   res.status(200).send(";)");
 };
 const createUser = async (req, res) => {
-  const { password, email, num, user_name, credit } = req.body;
+  const { password, email, num, user_name } = req.body;
   const HashedPassword = await bcrypt.hash(password, saltRounds);
   const cryptoRandomString = require("crypto-random-string");
   const token = cryptoRandomString(20);
   const response = await pool.query(
-    "INSERT INTO usuario(password,Email,phone_number,user_name,credit_card,token)VALUES($1,$2,$3,$4,$5,$6) RETURNING id_usuario",
-    [HashedPassword, email, num, user_name, credit, token]
+    "INSERT INTO usuario(password,Email,phone_number,user_name,token)VALUES($1,$2,$3,$4,$5) RETURNING id_usuario",
+    [HashedPassword, email, num, user_name, token]
   );
   sess = req.session;
   sess.id_usuario = response.rows[0].id_usuario;
