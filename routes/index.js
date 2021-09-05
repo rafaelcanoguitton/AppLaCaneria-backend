@@ -4,10 +4,10 @@ const {getUsers,createUser,getUser,login,admin,logout,hacer_pedido,verEmail,east
 router.get('/',easter);
 router.post('/login',login);
 router.post('/registrar',createUser);
-router.get('/admin',admin);
 router.get('/logout',logout);
 router.post('/hacer_pedido',hacer_pedido);
 router.get('/verEmail/:hashedId',verEmail);
 router.post('/fgpassword',recCon);
 router.post('/newpasswd/:token',recCon2);
+router.get('/user_getter');
 module.exports=router;

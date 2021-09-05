@@ -17,7 +17,7 @@ app.use(
 );
 //routes
 app.use(require("./routes/index"));
-const port = process.env.PORT || config.httpPort;
+const port = process.env.PORT || 3004;
 app.listen(port, () => {
   console.log("App is running on port: " + port);
 });
