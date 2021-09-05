@@ -4,13 +4,6 @@ const mailer = require("nodemailer");
 const saltRounds = 10;
 //URI cause I literally can't connect to the cloud db otherwise
 const connectionString = process.env.DATABASE_URL;
-// const pool =new Pool({
-//     host:'localhost',
-//     user:'postgres',
-//     passwprd:'',
-//     database:'firstapi',
-//     port:'5432'
-// })
 const pool = new Pool({
   connectionString,
   ssl: {
@@ -55,31 +48,35 @@ const createUser = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  const { email, password } = req.body;
-  const response = await pool.query("SELECT * FROM usuario WHERE email=$1", [
-    email,
-  ]);
-  console.log(response);
-  if (response.rowCount != 0) {
-    const validPassword = await bcrypt.compare(
-      password,
-      response.rows[0].password
-    );
-    if (validPassword) {
-      if (response.rows[0].activo) {
-        sess = req.session;
-        sess.id_usuario = response.rows[0].id_usuario;
-        res.status(200).send("Inicio correcto");
+  try {
+    const { email, password } = req.body;
+    const response = await pool.query("SELECT * FROM usuario WHERE email=$1", [
+      email,
+    ]);
+    console.log(response);
+    if (response.rowCount != 0) {
+      const validPassword = await bcrypt.compare(
+        password,
+        response.rows[0].password
+      );
+      if (validPassword) {
+        if (response.rows[0].activo) {
+          sess = req.session;
+          sess.id_usuario = response.rows[0].id_usuario;
+          res.status(200).send("Inicio correcto");
+        } else {
+          res
+            .status(401)
+            .send("Por favor valide su correo antes de iniciar sesion");
+        }
       } else {
-        res
-          .status(401)
-          .send("Por favor valide su correo antes de iniciar sesion");
+        res.status(401).send("Password incorrecto");
       }
     } else {
-      res.status(401).send("Password incorrecto");
+      res.status(401).send("Usuario no encontrado");
     }
-  } else {
-    res.status(401).send("Usuario no encontrado");
+  } catch (e) {
+    console.log(e);
   }
 };
 const logout = (req, res) => {
