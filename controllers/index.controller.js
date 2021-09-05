@@ -229,7 +229,6 @@ const update = async (req, res) => {
 module.exports = {
   createUser,
   login,
-  admin,
   logout,
   hacer_pedido,
   verEmail,
